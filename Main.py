@@ -11,6 +11,7 @@ def main():
     print("Testing image to text gen")
     
     client = OpenAI()
+    callToOpenAI("", "What is this image showing in one word?", "", "")
     
     pass
 
@@ -18,7 +19,7 @@ def main():
 # Extension Functions 
 #####################################################################
 
-def callToOpenAI(client, content, api_key):
+def callToOpenAI(client, content, img, api_key):
     
     url = "https://api.openai.com/v1/chat/completions"
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
@@ -33,10 +34,11 @@ def callToOpenAI(client, content, api_key):
                 "text": content
                 },
                 {
-                "type": "image_url",
-                "image_url": {
-                    "url": f"data:image/jpeg;base64,{base64_image}"
-                }
+                "type": "image_file",
+                "image_file": {
+                    "file_id": img,
+                    "purpose" : "vision"
+                    }
                 }
             ]
             }
@@ -44,9 +46,9 @@ def callToOpenAI(client, content, api_key):
         "max_tokens": 300
     }
 
-    x = requests.post(url, headers = headers, json = request)
+    response = requests.post(url, headers = headers, json = request)
 
-    print(x.text)
+    print(response.json)
     
     pass
 
