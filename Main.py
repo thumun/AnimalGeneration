@@ -27,7 +27,7 @@ def main():
     # Load the cascade
     face_cascade = cv2.CascadeClassifier("D:\CV\AnimalGeneration\haarcascade_frontalface_default.xml")
     # Read the input image
-    img = cv2.imread("D:\CV\AnimalGeneration\gettyimages-1358620879-612x612.jpg")
+    img = cv2.imread("D:\CV\AnimalGeneration\Screenshot 2024-10-30 210906.png")
     # Convert into grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     # Detect faces
